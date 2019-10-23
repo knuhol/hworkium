@@ -1,20 +1,23 @@
 import React from 'react';
 
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
 
-import { ROUTES } from '../routes';
+import { ROUTE } from '../routes';
 
 const NavigationBar: React.FC = () => (
   <Navbar bg="dark" variant="dark" expand="sm">
-    <Navbar.Brand as={Link} to={ROUTES.HOME}>
+    <Navbar.Brand as={NavLink} to={ROUTE.HOME}>
       Hworkium
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav>
-        <Nav.Link as={Link} to={ROUTES.HELLO_WORLD} href="#">
+        <Nav.Link as={NavLink} to={ROUTE.HELLO_WORLD}>
           Hello world
+        </Nav.Link>
+        <Nav.Link as={NavLink} to={ROUTE.TEST}>
+          Test
         </Nav.Link>
       </Nav>
     </Navbar.Collapse>

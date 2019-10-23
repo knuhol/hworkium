@@ -1,6 +1,9 @@
-const ROUTES = {
+const ROUTE = {
   HOME: '/',
   HELLO_WORLD: '/hello-world',
+  TEST: '/test',
 };
 
-export { ROUTES };
+export type Route = typeof ROUTE[keyof typeof ROUTE];
+
+export { ROUTE };
