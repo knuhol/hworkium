@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import NavigationBar from './NavigationBar';
 import Home from './Home';
 import Janitors from './Janitors';
+import Tasks from './Tasks';
 
 import { ROUTE } from './routes';
 
@@ -18,8 +19,8 @@ const App: React.FC = () => (
         <Route ecxact path={ROUTE.JANITORS}>
           <Janitors />
         </Route>
-        <Route exact path={ROUTE.TEST}>
-          <></>
+        <Route exact path={ROUTE.TASKS}>
+          <Tasks />
         </Route>
       </Switch>
     </div>

@@ -1,9 +1,7 @@
 const ROUTE = {
   HOME: '/',
   JANITORS: '/janitors',
-  TEST: '/test',
+  TASKS: '/tasks',
 };
-
-export type Route = typeof ROUTE[keyof typeof ROUTE];
 
 export { ROUTE };

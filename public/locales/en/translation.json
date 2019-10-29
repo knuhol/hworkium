@@ -3,15 +3,26 @@
   "section": {
     "home": "Home",
     "janitors": "Janitors",
-    "test": "Test"
+    "tasks": "Tasks"
   },
   "janitors": {
-    "currentJanitors": "Our involuntery janitors for this day:",
+    "currentJanitors": "Our involuntary janitors for this day:",
     "moreJanitors": "Who is missing on the list?",
     "name": "Name",
     "add": "Add janitor",
     "janitor": "Janitor",
-    "fire": "Fire",
+    "fire": "Fire"
+  },
+  "tasks": {
+    "currentTasks": "All the boring tasks which have to be done:",
+    "moreTasks": "Oh no, do we really need to add more of them?",
+    "description": "Description",
+    "difficulty": "Difficulty",
+    "add": "Add task",
+    "task": "Task",
+    "giveUp": "Give up"
+  },
+  "global": {
     "really": "Really?",
     "yes": "Damn, yes!",
     "no": "Hell, no!"

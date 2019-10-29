@@ -20,8 +20,8 @@ const NavigationBar: React.FC = () => {
           <Nav.Link as={NavLink} to={ROUTE.JANITORS}>
             {t('section.janitors')}
           </Nav.Link>
-          <Nav.Link as={NavLink} to={ROUTE.TEST}>
-            {t('section.test')}
+          <Nav.Link as={NavLink} to={ROUTE.TASKS}>
+            {t('section.tasks')}
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>

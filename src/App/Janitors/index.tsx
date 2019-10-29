@@ -1,8 +1,8 @@
 import React from 'react';
-import { Col, Container, Row, Form, Button, Badge } from 'react-bootstrap';
+import { Col, Container, Row, Form, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt, faCheck, faCross} from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Janitors: React.FC = () => {
   const { t } = useTranslation();
@@ -32,7 +32,7 @@ const Janitors: React.FC = () => {
                 <th scope="row">1</th>
                 <td>Tereza</td>
                 <td>
-                  <Button className="ml-2" size="sm">
+                  <Button size="sm">
                     <FontAwesomeIcon icon={faTrashAlt} size="sm" />
                   </Button>
                 </td>
@@ -41,12 +41,12 @@ const Janitors: React.FC = () => {
                 <th scope="row">2</th>
                 <td>Knut</td>
                 <td>
-                  {t('janitors.really')}
+                  {t('global.really')}
                   <Button variant="success" className="ml-2" size="sm">
-                    {t('janitors.yes')}
+                    {t('global.yes')}
                   </Button>
                   <Button variant="danger" className="ml-2" size="sm">
-                    {t('janitors.no')}
+                    {t('global.no')}
                   </Button>
                 </td>
               </tr>
@@ -55,12 +55,10 @@ const Janitors: React.FC = () => {
         </Col>
       </Row>
       <Row>
-        <Col className="mb-3">{t('janitors.moreJanitors')}</Col>
-      </Row>
-      <Row>
         <Col lg={6}>
           <Form>
             <Form.Group>
+              <Form.Label>{t('janitors.moreJanitors')}</Form.Label>
               <Form.Control type="name" placeholder={t('janitors.name')} />
             </Form.Group>
             <Button variant="primary" type="submit">
