@@ -1,11 +1,29 @@
-import React from 'react';
+import React, { SyntheticEvent, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Col, Container, Row, Form, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import uuidv4 from 'uuid/v4';
+
+import { AppState } from '../../reducers';
+import { addJanitor } from './duck/actions';
+import { Janitor } from './duck/types';
 
 const Janitors: React.FC = () => {
+  const [newJanitor, setNewJanitor] = useState('');
   const { t } = useTranslation();
+  const janitors = useSelector((state: AppState) => state.janitors.list);
+  const dispatch = useDispatch();
+
+  const onNewJanitorChange = (event: React.ChangeEvent<HTMLInputElement>): void =>
+    setNewJanitor(event.target.value);
+
+  const onNewJanitorClick = (event: SyntheticEvent): void => {
+    event.preventDefault();
+    dispatch(addJanitor({ id: uuidv4(), name: newJanitor }));
+    setNewJanitor('');
+  };
 
   return (
     <Container>
@@ -28,15 +46,17 @@ const Janitors: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Tereza</td>
-                <td>
-                  <Button size="sm">
-                    <FontAwesomeIcon icon={faTrashAlt} size="sm" />
-                  </Button>
-                </td>
-              </tr>
+              {janitors.map((janitor: Janitor, index: number) => (
+                <tr key={janitor.id}>
+                  <th scope="row">{index + 1}</th>
+                  <td>{janitor.name}</td>
+                  <td>
+                    <Button size="sm">
+                      <FontAwesomeIcon icon={faTrashAlt} size="sm" />
+                    </Button>
+                  </td>
+                </tr>
+              ))}
               <tr>
                 <th scope="row">2</th>
                 <td>Knut</td>
@@ -59,9 +79,14 @@ const Janitors: React.FC = () => {
           <Form>
             <Form.Group>
               <Form.Label>{t('janitors.moreJanitors')}</Form.Label>
-              <Form.Control type="name" placeholder={t('janitors.name')} />
+              <Form.Control
+                type="text"
+                value={newJanitor}
+                onChange={onNewJanitorChange}
+                placeholder={t('janitors.name')}
+              />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" onClick={onNewJanitorClick}>
               {t('janitors.add')}
             </Button>
           </Form>
