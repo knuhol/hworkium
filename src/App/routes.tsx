@@ -1,6 +1,6 @@
 const ROUTE = {
   HOME: '/',
-  HELLO_WORLD: '/hello-world',
+  JANITORS: '/janitors',
   TEST: '/test',
 };
 
