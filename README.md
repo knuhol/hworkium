@@ -13,7 +13,10 @@ It's fairy simple. All you need to do is to follow these steps:
 
 Read your tasks list and, well, do the housework (the boring part).
 
-That's it! 
+That's it!
+
+### Demo
+Demo is hosted on [hworkium.000webhostapp.com](https://hworkium.000webhostapp.com/). 
 
 #### Version 1.0
 This is a first version on this app which works but needs lot of improvements.
