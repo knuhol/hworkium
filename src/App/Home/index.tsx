@@ -72,8 +72,8 @@ const Home: React.FC = () => {
       </Row>
       <Row className="mt-3">
         <Col>
-          <h4>{t('credits.title')}</h4>
-          <p>{t('credits.author')}</p>
+          <h4>{t('home.credits.title')}</h4>
+          <p>{t('home.credits.author')}</p>
           <p>
             <Trans i18nKey="home.credits.gitHub">
               Interested in used technologies? Missing features? Want to improve this app or fork
