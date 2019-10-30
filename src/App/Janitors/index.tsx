@@ -1,13 +1,12 @@
-import React, { SyntheticEvent, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Col, Container, Row, Form, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import uuidv4 from 'uuid/v4';
 
 import { AppState } from '../../reducers';
-import { addJanitor } from './duck/actions';
+import { addJanitor, removeJanitor } from './duck/actions';
+import ItemRemovalTable from '../ItemRemovalTable/intex';
 import { Janitor } from './duck/types';
 
 const Janitors: React.FC = () => {
@@ -19,11 +18,12 @@ const Janitors: React.FC = () => {
   const onNewJanitorChange = (event: React.ChangeEvent<HTMLInputElement>): void =>
     setNewJanitor(event.target.value);
 
-  const onNewJanitorClick = (event: SyntheticEvent): void => {
-    event.preventDefault();
+  const onNewJanitorClick = (): void => {
     dispatch(addJanitor({ id: uuidv4(), name: newJanitor }));
     setNewJanitor('');
   };
+
+  const displayJanitor = (janitor: Janitor): React.ReactNode => janitor.name;
 
   return (
     <Container>
@@ -37,41 +37,13 @@ const Janitors: React.FC = () => {
       </Row>
       <Row>
         <Col lg={6}>
-          <table className="table table-striped table-hover">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">{t('janitors.janitor')}</th>
-                <th scope="col">{t('janitors.fire')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {janitors.map((janitor: Janitor, index: number) => (
-                <tr key={janitor.id}>
-                  <th scope="row">{index + 1}</th>
-                  <td>{janitor.name}</td>
-                  <td>
-                    <Button size="sm">
-                      <FontAwesomeIcon icon={faTrashAlt} size="sm" />
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-              <tr>
-                <th scope="row">2</th>
-                <td>Knut</td>
-                <td>
-                  {t('global.really')}
-                  <Button variant="success" className="ml-2" size="sm">
-                    {t('global.yes')}
-                  </Button>
-                  <Button variant="danger" className="ml-2" size="sm">
-                    {t('global.no')}
-                  </Button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <ItemRemovalTable
+            itemBodyHeadline={t('janitors.janitor')}
+            itemRemovalHeadline={t('janitors.fire')}
+            items={janitors}
+            removeItem={removeJanitor}
+            displayItem={displayJanitor}
+          />
         </Col>
       </Row>
       <Row>
@@ -86,7 +58,7 @@ const Janitors: React.FC = () => {
                 placeholder={t('janitors.name')}
               />
             </Form.Group>
-            <Button variant="primary" type="submit" onClick={onNewJanitorClick}>
+            <Button variant="primary" onClick={onNewJanitorClick}>
               {t('janitors.add')}
             </Button>
           </Form>

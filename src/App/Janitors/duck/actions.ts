@@ -1,4 +1,4 @@
-import { ADD_JANITOR, JanitorsActionTypes } from './types';
+import { ADD_JANITOR, REMOVE_JANITOR, JanitorsActionTypes } from './types';
 
 import { Janitor } from './types';
 
@@ -7,4 +7,9 @@ const addJanitor = (janitor: Janitor): JanitorsActionTypes => ({
   payload: { janitor },
 });
 
-export { addJanitor };
+const removeJanitor = (id: string): JanitorsActionTypes => ({
+  type: REMOVE_JANITOR,
+  payload: { id },
+});
+
+export { addJanitor, removeJanitor };

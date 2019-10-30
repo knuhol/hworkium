@@ -1,4 +1,5 @@
 export const ADD_JANITOR = 'hworkium/janitors/ADD_JANITOR';
+export const REMOVE_JANITOR = 'hworkium/janitors/REMOVE_JANITOR';
 
 export interface Janitor {
   id: string;
@@ -10,8 +11,13 @@ interface AddJanitorAction {
   payload: { janitor: Janitor };
 }
 
+interface RemoveJanitorAction {
+  type: typeof REMOVE_JANITOR;
+  payload: { id: string };
+}
+
 export interface JanitorsState {
   list: Janitor[];
 }
 
-export type JanitorsActionTypes = AddJanitorAction;
+export type JanitorsActionTypes = AddJanitorAction | RemoveJanitorAction;
