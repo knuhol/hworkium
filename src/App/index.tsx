@@ -5,7 +5,7 @@ import NavigationBar from './NavigationBar';
 import Home from './Home';
 import Janitors from './Janitors';
 import Tasks from './Tasks';
-
+import Works from './Works';
 import { ROUTE } from './routes';
 
 const App: React.FC = () => (
@@ -21,6 +21,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path={ROUTE.TASKS}>
           <Tasks />
+        </Route>
+        <Route exact path={ROUTE.WORK}>
+          <Works />
         </Route>
       </Switch>
     </div>

@@ -3,7 +3,8 @@
   "section": {
     "home": "Home",
     "janitors": "Janitors",
-    "tasks": "Tasks"
+    "tasks": "Tasks",
+    "works": "Works"
   },
   "janitors": {
     "currentJanitors": "Our involuntary janitors for this day:",
@@ -21,6 +22,10 @@
     "add": "Add task",
     "task": "Task",
     "giveUp": "Give up"
+  },
+  "works": {
+    "start": "Uhm, let's do it! Sooner we start, sooner we are finished...",
+    "assign": "Assign tasks!"
   },
   "global": {
     "really": "Really?",

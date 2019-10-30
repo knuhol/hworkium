@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Col, Row, Button, Badge, Form } from 'react-bootstrap';
+import { Container, Col, Row, Button, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import range from 'lodash/range';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,9 +9,11 @@ import { addTask, removeTask } from './duck/actions';
 import ItemRemovalTable from '../ItemRemovalTable';
 import { Task } from './duck/types';
 import { RootState } from '../../reducers';
+import Title from '../Title';
+import TaskItem, { MAX_DIFFICULTY } from '../TaskItem';
+import { deleteWholeWork } from '../Works/duck/actions';
 
 const Tasks: React.FC = () => {
-  const MAX_DIFFICULTY = 6;
   const NEW_TASK_DEFAULT_VALUE = '';
   const NEW_TASK_DIFFICULTY_DEFAULT_VALUE = '1';
 
@@ -28,42 +30,19 @@ const Tasks: React.FC = () => {
     setNewTaskDifficulty(event.target.value);
 
   const onNewTaskClick = (): void => {
-    console.log('onNewTaskClick');
     dispatch(addTask({ id: uuidv4(), name: newTask, difficulty: parseInt(newTaskDifficulty) }));
+    dispatch(deleteWholeWork());
     setNewTask(NEW_TASK_DEFAULT_VALUE);
     setNewTaskDifficulty(NEW_TASK_DIFFICULTY_DEFAULT_VALUE);
   };
 
-  const displayTask = (task: Task): React.ReactNode => {
-    const quotient = Math.floor(MAX_DIFFICULTY / 3);
-    const remainder = MAX_DIFFICULTY % 3;
-
-    let variant: 'success' | 'warning' | 'danger';
-    if (task.difficulty <= quotient) {
-      variant = 'success';
-    } else if (task.difficulty <= quotient * 2 + remainder) {
-      variant = 'warning';
-    } else {
-      variant = 'danger';
-    }
-
-    return (
-      <>
-        {task.name} <Badge variant={variant}>{task.difficulty}</Badge>
-      </>
-    );
-  };
+  const displayTask = (task: Task): React.ReactNode => (
+    <TaskItem description={task.name} difficulty={task.difficulty} />
+  );
 
   return (
     <Container>
-      <Row>
-        <Col>
-          <h1>{t('section.tasks')}</h1>
-        </Col>
-      </Row>
-      <Row>
-        <Col className="mt-4 mb-4">{t('tasks.currentTasks')}</Col>
-      </Row>
+      <Title headline={t('section.tasks')} introText={t('tasks.currentTasks')} />
       <Row>
         <Col>
           <ItemRemovalTable

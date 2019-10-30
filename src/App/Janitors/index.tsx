@@ -8,6 +8,8 @@ import { RootState } from '../../reducers';
 import { addJanitor, removeJanitor } from './duck/actions';
 import ItemRemovalTable from '../ItemRemovalTable';
 import { Janitor } from './duck/types';
+import Title from '../Title';
+import { deleteWholeWork } from '../Works/duck/actions';
 
 const Janitors: React.FC = () => {
   const [newJanitor, setNewJanitor] = useState('');
@@ -20,6 +22,7 @@ const Janitors: React.FC = () => {
 
   const onNewJanitorClick = (): void => {
     dispatch(addJanitor({ id: uuidv4(), name: newJanitor }));
+    dispatch(deleteWholeWork());
     setNewJanitor('');
   };
 
@@ -27,14 +30,7 @@ const Janitors: React.FC = () => {
 
   return (
     <Container>
-      <Row>
-        <Col>
-          <h1>{t('section.janitors')}</h1>
-        </Col>
-      </Row>
-      <Row>
-        <Col className="mt-4 mb-4">{t('janitors.currentJanitors')}</Col>
-      </Row>
+      <Title headline={t('section.janitors')} introText={t('janitors.currentJanitors')} />
       <Row>
         <Col lg={6}>
           <ItemRemovalTable

@@ -23,6 +23,9 @@ const NavigationBar: React.FC = () => {
           <Nav.Link as={NavLink} to={ROUTE.TASKS}>
             {t('section.tasks')}
           </Nav.Link>
+          <Nav.Link as={NavLink} to={ROUTE.WORK}>
+            {t('section.works')}
+          </Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

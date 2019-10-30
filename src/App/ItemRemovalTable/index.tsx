@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import ApproveRemoval from './ApproveRemoval';
+import { deleteWholeWork } from '../Works/duck/actions';
 
 interface Item {
   id: string;
@@ -36,6 +37,7 @@ const ItemRemovalTable: React.FC<ItemRemovalTableProps> = ({
 
   const onApproveItemRemovalClick = (id: string) => (): void => {
     dispatch(removeItem(id));
+    dispatch(deleteWholeWork());
   };
 
   const onRejectItemRemovalClick = (): void => {
