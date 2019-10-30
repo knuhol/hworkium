@@ -22,7 +22,7 @@ const App: React.FC = () => (
         <Route exact path={ROUTE.TASKS}>
           <Tasks />
         </Route>
-        <Route exact path={ROUTE.WORK}>
+        <Route exact path={ROUTE.WORKS}>
           <Works />
         </Route>
       </Switch>

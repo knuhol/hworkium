@@ -6,6 +6,36 @@
     "tasks": "Tasks",
     "works": "Works"
   },
+  "home": {
+    "intro": "Do you also hate housework as much as me and my wife do? Don't worry, Hworkium is here to help you get rid of it quickly and do something what is a real fun soon!",
+    "description": "People usually struggle to do housework because they find hard to manage it and decide on who will pick up a which task. This piece of code will do this for you! Do a simple setup, click a button and that's it - every household member has assigned a task list respect the amount of work which is required - so everybody should be done approximately in the same time.",
+    "howDoesItWork": {
+      "headline": "How Does It Work?",
+      "intro": "It's fairy simple. All you need to do is to follow these steps:",
+      "1": "Go to <1>Janitor</1> page and add all household members who will participate on housework.",
+      "2": "Go to <1>Tasks</1> page and add all tasks which has to be done.",
+      "3": "Go to <1>Works</1> page and lick a magic button.",
+      "4": "Read your tasks list and, well, do the housework (the boring part).",
+      "finalWorlds": "That's it!"
+    },
+    "version": {
+      "title": "Version",
+      "description": "This is a first version on this app which works but needs lot of improvements.",
+      "feature": "Feature:",
+      "missing": "Missing:",
+      "1": "All data persist in your browser. Feel free to refresh or come back later. Once you add/remove janitor or tasks, the works list is reset.",
+      "2": "Better UX/UI. Inform when no janitors/tasks are in the system, loading data screen, better responsive design, more icons etc.",
+      "3": "Other languages support.",
+      "4": "Partially manual selection of tasks as an alternative to randomization.",
+      "5": "Checking done tasks.",
+      "6": "User accounts to persist data permanently and share over devices/within a household."
+    },
+    "credits": {
+      "title": "Credits",
+      "author": "Knut Holm has written this app. Hworkium is open source licensed with MIT.",
+      "gitHub": "Interested in used technologies? Missing features? Want to improve this app or fork it? Continue to <1>GitHub</1>!"
+    }
+  },
   "janitors": {
     "currentJanitors": "Our involuntary janitors for this day:",
     "moreJanitors": "Who is missing on the list?",

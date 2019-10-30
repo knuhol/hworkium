@@ -2,7 +2,7 @@ const ROUTE = {
   HOME: '/',
   JANITORS: '/janitors',
   TASKS: '/tasks',
-  WORK: '/work',
+  WORKS: '/works',
 };
 
 export { ROUTE };
