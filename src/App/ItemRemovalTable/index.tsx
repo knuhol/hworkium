@@ -15,7 +15,8 @@ interface ItemRemovalTableProps {
   itemBodyHeadline: string;
   itemRemovalHeadline: string;
   items: Item[];
-  displayItem: (item: Item) => React.ReactNode;
+  // TODO: How can we type item here?
+  displayItem: (item: any) => React.ReactNode;
   removeItem: (id: string) => void;
 }
 

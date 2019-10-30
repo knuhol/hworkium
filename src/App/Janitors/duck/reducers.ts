@@ -1,20 +1,18 @@
 import reject from 'lodash/reject';
 
-import { ADD_JANITOR, JanitorsActionTypes, JanitorsState, REMOVE_JANITOR } from './types';
+import { ADD_JANITOR, Janitor, JanitorsActionTypes, JanitorsState, REMOVE_JANITOR } from './types';
 
-const initialState: JanitorsState = {
-  list: [],
-};
+const initialState: JanitorsState = [];
 
-const janitorReducer = (state = initialState, action: JanitorsActionTypes): JanitorsState => {
+const janitorsReducer = (state = initialState, action: JanitorsActionTypes): JanitorsState => {
   switch (action.type) {
     case ADD_JANITOR:
-      return { list: [...state.list, action.payload.janitor] };
+      return [...state, action.payload.janitor];
     case REMOVE_JANITOR:
-      return { list: reject(state.list, { id: action.payload.id }) };
+      return reject<Janitor>(state, { id: action.payload.id });
     default:
       return state;
   }
 };
 
-export default janitorReducer;
+export default janitorsReducer;

@@ -1,11 +1,59 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Col, Row, Button, Badge, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import range from 'lodash/range';
+import { useDispatch, useSelector } from 'react-redux';
+import uuidv4 from 'uuid/v4';
+
+import { addTask, removeTask } from './duck/actions';
+import ItemRemovalTable from '../ItemRemovalTable';
+import { Task } from './duck/types';
+import { RootState } from '../../reducers';
 
 const Tasks: React.FC = () => {
+  const MAX_DIFFICULTY = 6;
+  const NEW_TASK_DEFAULT_VALUE = '';
+  const NEW_TASK_DIFFICULTY_DEFAULT_VALUE = '1';
+
+  const [newTask, setNewTask] = useState(NEW_TASK_DEFAULT_VALUE);
+  const [newTaskDifficulty, setNewTaskDifficulty] = useState(NEW_TASK_DIFFICULTY_DEFAULT_VALUE);
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const tasks = useSelector((state: RootState) => state.tasks);
+
+  const onNewTaskChange = (event: React.ChangeEvent<HTMLInputElement>): void =>
+    setNewTask(event.target.value);
+
+  const ontNewTaskDifficultyChange = (event: React.ChangeEvent<HTMLInputElement>): void =>
+    setNewTaskDifficulty(event.target.value);
+
+  const onNewTaskClick = (): void => {
+    console.log('onNewTaskClick');
+    dispatch(addTask({ id: uuidv4(), name: newTask, difficulty: parseInt(newTaskDifficulty) }));
+    setNewTask(NEW_TASK_DEFAULT_VALUE);
+    setNewTaskDifficulty(NEW_TASK_DIFFICULTY_DEFAULT_VALUE);
+  };
+
+  const displayTask = (task: Task): React.ReactNode => {
+    const quotient = Math.floor(MAX_DIFFICULTY / 3);
+    const remainder = MAX_DIFFICULTY % 3;
+
+    let variant: 'success' | 'warning' | 'danger';
+    if (task.difficulty <= quotient) {
+      variant = 'success';
+    } else if (task.difficulty <= quotient * 2 + remainder) {
+      variant = 'warning';
+    } else {
+      variant = 'danger';
+    }
+
+    return (
+      <>
+        {task.name} <Badge variant={variant}>{task.difficulty}</Badge>
+      </>
+    );
+  };
+
   return (
     <Container>
       <Row>
@@ -18,65 +66,13 @@ const Tasks: React.FC = () => {
       </Row>
       <Row>
         <Col>
-          <table className="table table-striped table-hover">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">{t('tasks.task')}</th>
-                <th scope="col">{t('tasks.giveUp')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>
-                  Clean kitchen <Badge variant="warning">2</Badge>
-                </td>
-                <td>
-                  <Button size="sm">
-                    <FontAwesomeIcon icon={faTrashAlt} size="sm" />
-                  </Button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>
-                  Go shopping <Badge variant="danger">4</Badge>
-                </td>
-                <td>
-                  {t('global.really')}
-                  <Button variant="success" className="ml-2" size="sm">
-                    {t('global.yes')}
-                  </Button>
-                  <Button variant="danger" className="ml-2" size="sm">
-                    {t('global.no')}
-                  </Button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>
-                  Clean water fountain <Badge variant="success">1</Badge>
-                </td>
-                <td>
-                  <Button size="sm">
-                    <FontAwesomeIcon icon={faTrashAlt} size="sm" />
-                  </Button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">4</th>
-                <td>
-                  Vacuum-cleaning <Badge variant="warning">3</Badge>
-                </td>
-                <td>
-                  <Button size="sm">
-                    <FontAwesomeIcon icon={faTrashAlt} size="sm" />
-                  </Button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <ItemRemovalTable
+            itemBodyHeadline={t('tasks.task')}
+            itemRemovalHeadline={t('tasks.giveUp')}
+            items={tasks}
+            removeItem={removeTask}
+            displayItem={displayTask}
+          />
         </Col>
       </Row>
       <Row>
@@ -86,26 +82,34 @@ const Tasks: React.FC = () => {
               <Col lg={10}>
                 <Form.Group>
                   <Form.Label>{t('tasks.moreTasks')}</Form.Label>
-                  <Form.Control type="description" placeholder={t('tasks.description')} />
+                  <Form.Control
+                    type="text"
+                    value={newTask}
+                    placeholder={t('tasks.description')}
+                    onChange={onNewTaskChange}
+                  />
                 </Form.Group>
               </Col>
               <Col lg={2}>
                 <Form.Group controlId="difficulty">
                   <Form.Label>{t('tasks.difficulty')}</Form.Label>
-                  <Form.Control as="select">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
+                  <Form.Control
+                    value={newTaskDifficulty}
+                    as="select"
+                    onChange={ontNewTaskDifficultyChange}
+                  >
+                    {range(1, MAX_DIFFICULTY + 1).map(difficulty => (
+                      <option key={difficulty} value={difficulty}>
+                        {difficulty}
+                      </option>
+                    ))}
                   </Form.Control>
                 </Form.Group>
               </Col>
             </Row>
             <Row>
               <Col>
-                <Button variant="primary" type="submit">
+                <Button variant="primary" onClick={onNewTaskClick}>
                   {t('tasks.add')}
                 </Button>
               </Col>

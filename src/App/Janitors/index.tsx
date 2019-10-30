@@ -4,15 +4,15 @@ import { Col, Container, Row, Form, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import uuidv4 from 'uuid/v4';
 
-import { AppState } from '../../reducers';
+import { RootState } from '../../reducers';
 import { addJanitor, removeJanitor } from './duck/actions';
-import ItemRemovalTable from '../ItemRemovalTable/intex';
+import ItemRemovalTable from '../ItemRemovalTable';
 import { Janitor } from './duck/types';
 
 const Janitors: React.FC = () => {
   const [newJanitor, setNewJanitor] = useState('');
   const { t } = useTranslation();
-  const janitors = useSelector((state: AppState) => state.janitors.list);
+  const janitors = useSelector((state: RootState) => state.janitors);
   const dispatch = useDispatch();
 
   const onNewJanitorChange = (event: React.ChangeEvent<HTMLInputElement>): void =>

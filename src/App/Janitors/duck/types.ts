@@ -16,8 +16,6 @@ interface RemoveJanitorAction {
   payload: { id: string };
 }
 
-export interface JanitorsState {
-  list: Janitor[];
-}
+export type JanitorsState = Janitor[];
 
 export type JanitorsActionTypes = AddJanitorAction | RemoveJanitorAction;

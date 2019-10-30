@@ -1,6 +1,4 @@
-import { ADD_JANITOR, REMOVE_JANITOR, JanitorsActionTypes } from './types';
-
-import { Janitor } from './types';
+import { ADD_JANITOR, REMOVE_JANITOR, JanitorsActionTypes, Janitor } from './types';
 
 const addJanitor = (janitor: Janitor): JanitorsActionTypes => ({
   type: ADD_JANITOR,
